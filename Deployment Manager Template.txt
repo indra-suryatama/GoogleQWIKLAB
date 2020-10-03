@@ -1,4 +1,4 @@
-Jawaban Terbaru
+Jawaban Terbaru ya
 
 resources:
 - type: compute.v1.instance
