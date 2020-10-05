@@ -1,0 +1,6 @@
+# Set Basic Project ID
+gcloud config set project [PROJECT_ID]
+
+# Set basic default compute Zone
+gcloud config set compute/zone us-central1-f
+

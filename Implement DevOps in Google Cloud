@@ -1,5 +1,7 @@
 Implement DevOps in Google Cloud: Challenge Lab
 
+
+LAB1
 gcloud config set compute/zone us-east1-b
 git clone https://source.developers.google.com/p/$DEVSHELL_PROJECT_ID/r/sample-app
 gcloud container clusters get-credentials jenkins-cd
@@ -7,6 +9,9 @@ kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-ad
 export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/component=jenkins-master" -l "app.kubernetes.io/instance=cd" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward $POD_NAME 8080:8080 >> /dev/null &
 printf $(kubectl get secret cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+secret: aRq0anBnYe -> Jenkin password
+
 cd sample-app
 kubectl create ns production
 kubectl apply -f k8s/production -n production
@@ -19,9 +24,13 @@ git config credential.helper gcloud.sh
 git remote add origin https://source.developers.google.com/p/$DEVSHELL_PROJECT_ID/r/sample-app
 git config --global user.email "[EMAIL_ADDRESS]"
 git config --global user.name "[USERNAME]"
+
+
+Task 2
+
 git checkout -b new-feature
-vi html.go  
-vi main.go  
+nano html.go  
+nano main.go  
 git add Jenkinsfile html.go main.go
 git commit -m "Version 2.0.0"
 git push origin new-feature

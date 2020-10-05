@@ -1,0 +1,59 @@
+Task 1
+gcloud compute networks create griffin-dev-vpc --project=qwiklabs-gcp-01-7c267f60010a --subnet-mode=custom --bgp-routing-mode=regional
+
+gcloud compute networks subnets create griffin-dev-wp --project=qwiklabs-gcp-01-7c267f60010a --range=192.168.16.0/20 --network=griffin-dev-vpc --region=us-east1
+
+gcloud compute networks subnets create griffin-dev-mgmt --project=qwiklabs-gcp-01-7c267f60010a --range=192.168.32.0/20 --network=griffin-dev-vpc --region=us-east1
+
+
+Task 2
+gsutil cp -r gs://cloud-training/gsp321/dm ~/
+cd dm
+edit prod-netork.yaml
+//Change Region
+
+gcloud deployment-manager deployments create griffin-prod --config prod-network.yaml
+
+
+Task 3
+Create VM
+gcloud compute --project=qwiklabs-gcp-01-7c267f60010a firewall-rules create allow-bastion-dev-ssh --direction=INGRESS --priority=1000 --network=griffin-dev-vpc --action=ALLOW --rules=tcp:22 --source-ranges=192.168.32.0/20 --target-tags=bastion
+gcloud compute --project=qwiklabs-gcp-01-7c267f60010a firewall-rules create allow-bastion-prod-ssh --direction=INGRESS --priority=1000 --network=griffin-prod-vpc --action=ALLOW --rules=tcp:22 --source-ranges=192.168.48.0/20 --target-tags=bastion
+
+
+Task 4
+gcloud sql connect griffin-dev-db --user=root --quiet
+ CREATE DATABASE wordpress;
+   GRANT ALL PRIVILEGES ON wordpress.* TO "wp_user"@"%" IDENTIFIED BY "stormwind_rules";
+   FLUSH PRIVILEGES;
+
+
+Task 5
+Create Kube as mentioned
+
+Task 6
+gsutil cp -r gs://cloud-training/gsp321/wp-k8s ~/
+cd ~/wp-k8s
+nano wp-env.yaml
+Ubah User ID dan password
+
+gcloud container clusters get-credentials griffin-dev --zone=us-east1
+kubectl apply -f wp-env.yaml
+
+  gcloud iam service-accounts keys create key.json \
+       --iam-account=cloud-sql-proxy@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
+   kubectl create secret generic cloudsql-instance-credentials \
+       --from-file key.json
+
+Task 6
+cd ~/wp-k8s
+nano wp-deployment.yaml
+Enter the instance name
+
+kubectl create -f wp-deployment.yaml
+kubectl create -f wp-service.yaml
+
+Task 8
+
+
+Task 9
