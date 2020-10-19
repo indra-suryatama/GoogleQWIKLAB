@@ -1,0 +1,22 @@
+https://chriskyfung.github.io/blog/qwiklabs/Configure-Windows-Bastion-Host-with-Terraform-on-GCP
+
+Task 1
+$DEVSHELL_PROJECT_ID
+gcloud compute --project=$DEVSHELL_PROJECT_ID networks create securenetwork --subnet-mode=custom
+gcloud compute --project=$DEVSHELL_PROJECT_ID subnets create securenetwork --network=securenetwork --region=us-central1 --range=192.168.1.0/24
+
+Task 2
+gcloud compute firewall-rules create myfirewalls --network securenetwork --allow=tcp:3389 --target-tags=rdp
+
+Task 3
+
+//gcloud beta compute --project=$DEVSHELL_PROJECT_ID instances create vm-securehost --zone=us-central1a --machine-type=n1-standard-2 --subnet-securenetwork --no-address -maintenance-
+
+
+
+Task 4
+
+
+Task 5
+gcloud compute reset-windwos-password vm-bastionhost --user app_admin --zone us central1-a
+

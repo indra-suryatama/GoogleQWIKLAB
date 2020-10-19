@@ -1,0 +1,46 @@
+Task 1
+
+export APIGEE_ORG=amatayrusardni-eval
+export APIKEY=u8VXujACEcoTDI9ozGJfbM05Ya59Zk6s
+
+#Apigee
+wget https://storage.googleapis.com/apigee-quest/scripts/lab13.rewind.sh
+wget https://storage.googleapis.com/apigee-quest/apiproxies/lab13.apiproxy.zip
+chmod +x lab13.rewind.sh;
+export APIGEE_USER=amatayrusardni@gmail.com
+export APIGEE_PW=Indr112788.
+
+./lab13.rewind.sh
+
+dCXROIizRWSZg7fW9i60KOWjawUyglcQ
+FloY6sc99oSBDYtXj5mPbsWLpXzrszSy
+
+yQavK7MoQxbGinOlSS8i3nlcTR36esZG
+
+ https://amatayrusardni-eval-test.apigee.net/verification-api-v1/verifyCard?apikey=yQavK7MoQxbGinOlSS8i3nlcTR36esZG
+ https://amatayrusardni-eval-test.apigee.net/verification-api-v1/verifyCard?mock=true&apikey=yQavK7MoQxbGinOlSS8i3nlcTR36esZG
+
+
+ https://us-central1-qwiklabs-gcp-03-29bffacb7e92.cloudfunctions.net/verifyCard
+
+curl -X POST \
+   https://amatayrusardni-eval-test.apigee.net/verification-api-v1/verifyCard?apikey=u8VXujACEcoTDI9ozGJfbM05Ya59Zk6s \
+   -H 'cache-control: no-cache' \
+   -H 'content-type: application/json' \
+   -H 'postman-token: 89236919-eabe-4357-e4c4-079f20ecd798' \
+   -d '{
+      "number": "2221005276762844",
+      "cvv": "345",
+      "expiration": "10/2025"
+   } '
+
+ curl -X POST \
+   'https://amatayrusardni-eval-test.apigee.net/verification-api-v1/verifyCard?mock=true&apikey=u8VXujACEcoTDI9ozGJfbM05Ya59Zk6s' \
+   -H 'cache-control: no-cache' \
+   -H 'content-type: application/json' \
+   -H 'postman-token: 89236919-eabe-4357-e4c4-079f20ecd798' \
+   -d '{
+      "number": "2221005276762844",
+      "cvv": "345",
+      "expiration": "10/2025"
+   } '

@@ -4,3 +4,11 @@ gcloud config set project [PROJECT_ID]
 # Set basic default compute Zone
 gcloud config set compute/zone us-central1-f
 
+#Create Bucket
+export BUCKET_NAME=<your-unique-name>
+gsutil mb gs://$BUCKET_NAME/
+
+#create function
+gcloud functions deploy verifyCard --runtime nodejs10 --trigger-http --allow-unauthenticated
+
+
